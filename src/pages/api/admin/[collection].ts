@@ -1,8 +1,8 @@
 
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { ApiRequest, ApiResponse } from '@/types';
 
 // Middleware to check admin session
-const checkAdminSession = (req: NextApiRequest): boolean => {
+const checkAdminSession = (req: ApiRequest): boolean => {
   // TODO: In a real app, you would verify the session cookie or token
   // This is just a placeholder
   const sessionToken = req.cookies.adminSession;
@@ -10,8 +10,8 @@ const checkAdminSession = (req: NextApiRequest): boolean => {
 };
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+  req: ApiRequest,
+  res: ApiResponse
 ) {
   // Check if the user is authorized
   if (!checkAdminSession(req)) {

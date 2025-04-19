@@ -1,5 +1,5 @@
 
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { ApiRequest, ApiResponse } from '@/types';
 
 // ADMIN: implement crypto-wallet addresses under this route
 const walletAddresses = {
@@ -8,8 +8,8 @@ const walletAddresses = {
 };
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+  req: ApiRequest,
+  res: ApiResponse
 ) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
