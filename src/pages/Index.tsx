@@ -1,13 +1,58 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState, useRef } from "react";
+import HeroSlider from "@/components/HeroSlider";
+import ProductCategoryTabs from "@/components/ProductCategoryTabs";
+import ProductCard from "@/components/ProductCard";
+import { products, getProductsByCategory } from "@/data/products";
+import Loader from "@/components/Loader";
 
 const Index = () => {
+  const [activeCategory, setActiveCategory] = useState("men");
+  const menSectionRef = useRef<HTMLDivElement>(null);
+  const womenSectionRef = useRef<HTMLDivElement>(null);
+  const collectiblesSectionRef = useRef<HTMLDivElement>(null);
+  
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <>
+      <Loader />
+      
+      <HeroSlider />
+      
+      <ProductCategoryTabs onCategoryChange={handleCategoryChange} />
+      
+      <div className="container mx-auto px-4 space-y-16 mb-16">
+        <div id="men-section" ref={menSectionRef}>
+          <h2 className="text-2xl font-bold mb-6">Men's Collection</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {getProductsByCategory("men").map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+        
+        <div id="women-section" ref={womenSectionRef}>
+          <h2 className="text-2xl font-bold mb-6">Women's Collection</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {getProductsByCategory("women").map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+        
+        <div id="collectibles-section" ref={collectiblesSectionRef}>
+          <h2 className="text-2xl font-bold mb-6">Collectibles</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {getProductsByCategory("collectibles").map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
