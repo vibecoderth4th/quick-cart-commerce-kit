@@ -10,9 +10,7 @@ type AdminSessionContextType = {
 
 const AdminSessionContext = createContext<AdminSessionContextType | undefined>(undefined);
 
-export const AdminSessionProvider: React.FC<{ children: React.ReactNode }> = ({ 
-  children 
-}) => {
+export const AdminSessionProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<AdminSession>({ isLoggedIn: false });
 
   // Check for existing session on mount
