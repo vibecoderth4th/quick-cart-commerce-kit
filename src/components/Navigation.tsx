@@ -8,12 +8,10 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "@/components/ui/navigation-menu";
 
 const navItems = [
-  { label: "Fashion", href: "/" },
-  { label: "Best Sellers", href: "/best-sellers" },
-  { label: "Art", href: "/art" },
-  { label: "Electronics", href: "/electronics" },
-  { label: "Home & Living", href: "/home-living" },
-  { label: "Gifts", href: "/gifts" },
+  { label: "NEW IN", href: "/" },
+  { label: "MEN", href: "/men" },
+  { label: "WOMEN", href: "/women" },
+  { label: "COLLECTIBLES", href: "/collectibles" },
 ];
 
 const Navigation = () => {
@@ -53,9 +51,9 @@ const Navigation = () => {
   }
 
   return (
-    <div className="flex items-center gap-12">
+    <div className="flex items-center gap-8">
       <Link to="/" className="shrink-0">
-        <img src="/logo.png" alt="Logo" className="h-12 w-auto" />
+        <img src="/logo.png" alt="Logo" className="h-8" />
       </Link>
       
       <NavigationMenu className="max-w-none">
@@ -64,7 +62,7 @@ const Navigation = () => {
             <NavigationMenuItem key={item.href}>
               <NavigationMenuLink
                 asChild
-                className="text-base font-medium text-gray-700 hover:text-black transition-colors"
+                className="group inline-flex h-10 w-max items-center justify-center px-4 py-2 text-sm font-medium transition-colors hover:text-primary focus:text-primary focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:text-primary/90"
               >
                 <Link to={item.href}>{item.label}</Link>
               </NavigationMenuLink>
