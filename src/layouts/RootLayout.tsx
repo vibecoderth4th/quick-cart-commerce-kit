@@ -9,10 +9,10 @@ import Navigation from "@/components/Navigation";
 const RootLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
+        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <Navigation />
-          <div className="ml-auto">
+          <div className="ml-auto flex items-center gap-4">
             <Cart />
           </div>
         </div>
