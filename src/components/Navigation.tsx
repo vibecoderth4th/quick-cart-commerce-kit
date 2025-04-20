@@ -7,7 +7,7 @@ type NavigationProps = {
   cartSlot: React.ReactNode;
 };
 
-/** Hardcoded nav structure: adjust as needed */
+// Hardcoded nav structure: adjust as needed
 const navItems = [
   { label: "NEW IN", href: "/" },
   { label: "MEN", href: "/men" },
@@ -18,7 +18,7 @@ const navItems = [
 const Navigation = ({ cartSlot }: NavigationProps) => {
   const isMobile = useIsMobile();
 
-  // Mobile: fallback to prior layout (Sheet, logo, etc)
+  // Mobile fallback
   if (isMobile) {
     return (
       <div className="flex items-center w-full px-4 py-4 bg-white shadow-sm">
@@ -31,47 +31,67 @@ const Navigation = ({ cartSlot }: NavigationProps) => {
   }
 
   return (
-    <nav
-      className="relative w-full flex flex-col items-center"
-      style={{ height: '155px' }}
-    >
-      {/* Layer group mimicking provided overlap/shape and backgrounds */}
-      {/* SVG shape LEFT */}
-      <div className="absolute left-0 top-0 z-10 w-[278px] h-[113px]">
+    <nav className="relative w-full flex flex-col items-center" style={{ height: '155px' }}>
+      {/* SVG shape LEFT - shifted fully left with drop shadow */}
+      <div
+        className="
+          absolute left-0 top-0 z-10
+          w-[180px] sm:w-[220px] md:w-[278px] h-[80px] sm:h-[100px] md:h-[113px]
+          pl-0 ml-0
+        "
+        style={{ }}
+      >
         <img
           src="/lovable-uploads/82034807-3457-43fd-9297-f381dab12827.png"
           alt="Navigation left shape"
-          className="w-full h-full object-contain select-none pointer-events-none"
+          className="
+            w-full h-full object-contain select-none pointer-events-none
+            drop-shadow-xl
+          "
           draggable={false}
+          style={{
+            // Extra shadow for more "obvious" effect:
+            filter: "drop-shadow(0px 6px 22px rgba(34,31,38,0.16)) drop-shadow(0px 4px 10px #221F26)",
+          }}
         />
       </div>
 
       {/* NAVIGATION BAR OUTER OVERLAY */}
-      <div className="absolute left-[156px] top-0 w-[1337px] h-[77px] z-0" style={{}}>
-        {/* Dark base background */}
-        <div className="absolute w-full h-full bg-[#0b0b0b] rounded-none" style={{}} />
-        {/* Slightly lighter overlay */}
-        <div className="absolute w-full h-full top-0 left-0 bg-[#0b0b0bb8] rounded-none" style={{}} />
-      </div>
-      {/* Main FLEX zone overlays everything above */}
       <div
         className="
-        relative z-20
-        flex flex-row items-center justify-center
-        w-[1337px] h-[77px]
-        mx-auto
-        mt-0
+          absolute
+          left-[140px] md:left-[156px]
+          top-0
+          w-[calc(100vw-140px)]
+          max-w-[1200px] md:max-w-[1337px] h-[77px] z-0
         "
+        style={{ }}
+      >
+        {/* Dark base background */}
+        <div className="absolute w-full h-full bg-[#0b0b0b] rounded-none" />
+        {/* Slightly lighter overlay */}
+        <div className="absolute w-full h-full top-0 left-0 bg-[#0b0b0bb8] rounded-none" />
+      </div>
+
+      {/* Main FLEX zone overlays everything above */}
+      <div
+        className={`
+          relative z-20
+          flex flex-row items-center justify-between
+          w-full
+          max-w-[1200px] md:max-w-[1337px] h-[77px]
+          mx-auto
+          mt-0
+        `}
         style={{
-          marginLeft: "156px",
+          marginLeft: "0px", // Move to left edge
+          paddingLeft: "180px", // Leaves space for logo SVG - match width above
         }}
       >
-        {/* Spacer to simulate left offset */}
-        <div className="flex-shrink-0 w-2" />
-        {/* Center nav menu */}
-        <div className="flex-grow flex justify-center">
+        {/* Center nav menu - shift left by reducing justify */}
+        <div className="flex-grow flex justify-start">
           <NavigationMenu className="bg-transparent shadow-none select-none">
-            <NavigationMenuList className="gap-10">
+            <NavigationMenuList className="gap-8 md:gap-10">
               {navItems.map((item) => (
                 <NavigationMenuItem key={item.href}>
                   <NavigationMenuLink
