@@ -37,7 +37,7 @@ const Navigation = ({
     height: '155px'
   }} className="relative w-full flex flex-col items-center mx-0">
       {/* SVG shape LEFT - shifted fully left with drop shadow */}
-      <div style={{}} className="absolute left--6 top-0 z-10 w-[180px] sm:w-[220px] md:w-[278px] h-[80px] sm:h-[100px] md:h-[113px] pl-0 ml-0 mx-[5px]">
+      <div style={{}} className="absolute left-0 top-0 z-10 w-[180px] sm:w-[220px] md:w-[278px] h-[80px] sm:h-[100px] md:h-[113px] pl-0 ml-0 mx-[5px]">
         <img src="/lovable-uploads/82034807-3457-43fd-9297-f381dab12827.png" alt="Navigation left shape" className="
             w-full h-full object-contain select-none pointer-events-none
             drop-shadow-xl
