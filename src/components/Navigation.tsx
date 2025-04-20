@@ -1,17 +1,17 @@
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "@/components/ui/navigation-menu";
+import NavigationShapes from "./NavigationShapes";
 
 const navItems = [
   { label: "NEW IN", href: "/" },
   { label: "MEN", href: "/men" },
   { label: "WOMEN", href: "/women" },
-  { label: "COLLECTIBLES", href: "/collectibles" },
+  { label: "COLLECTION", href: "/collectibles" },
 ];
 
 const Navigation = () => {
@@ -51,25 +51,27 @@ const Navigation = () => {
   }
 
   return (
-    <div className="flex items-center gap-8">
-      <Link to="/" className="shrink-0">
-        <img src="/logo.png" alt="Logo" className="h-8" />
+    <div className="relative flex items-center justify-between w-full">
+      <NavigationShapes />
+      
+      <Link to="/" className="relative z-10">
+        <img src="/logo.png" alt="Logo" className="h-12" />
       </Link>
       
-      <NavigationMenu className="max-w-none">
-        <NavigationMenuList className="gap-8">
+      <nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+        <ul className="flex items-center gap-16">
           {navItems.map((item) => (
-            <NavigationMenuItem key={item.href}>
-              <NavigationMenuLink
-                asChild
-                className="group inline-flex h-10 w-max items-center justify-center px-4 py-2 text-sm font-medium transition-colors hover:text-primary focus:text-primary focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:text-primary/90"
+            <li key={item.href}>
+              <Link
+                to={item.href}
+                className="text-lg font-bold tracking-wider hover:text-primary transition-colors"
               >
-                <Link to={item.href}>{item.label}</Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
+                {item.label}
+              </Link>
+            </li>
           ))}
-        </NavigationMenuList>
-      </NavigationMenu>
+        </ul>
+      </nav>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 
-import React from "react";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import Cart from "@/components/Cart";
@@ -10,10 +9,10 @@ import Navigation from "@/components/Navigation";
 const RootLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <header className="sticky top-0 z-50 bg-white">
+        <div className="h-20 relative overflow-hidden">
           <Navigation />
-          <div className="ml-auto">
+          <div className="absolute right-8 top-1/2 -translate-y-1/2 z-10">
             <Cart />
           </div>
         </div>
