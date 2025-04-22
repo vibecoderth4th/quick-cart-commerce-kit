@@ -1,3 +1,4 @@
+
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "@/components/ui/navigation-menu";
@@ -37,7 +38,7 @@ const Navigation = ({
   }
   return <nav style={{
     height: '155px'
-  }} className="relative w-full flex flex-col items-center mx-0">
+  }} className="relative w-full flex flex-col items-center">
       {/* SVG shape LEFT - shifted fully left with drop shadow */}
       <div className="absolute left-0 top-0 z-10 w-[180px] sm:w-[220px] md:w-[278px] h-[80px] sm:h-[100px] md:h-[113px] pl-0 -ml-[5px] mx-[5px]">
         <img src="/lovable-uploads/82034807-3457-43fd-9297-f381dab12827.png" alt="Navigation left shape" className="
@@ -54,9 +55,9 @@ const Navigation = ({
           absolute
           left-[140px] md:left-[156px]
           top-0
-          w-[calc(100vw-140px)]
+          w-full
           max-w-[1200px] md:max-w-[1337px] h-[77px] z-0
-        " style={{}}>
+        ">
         {/* Dark base background */}
         <div className="absolute w-full h-full bg-[#0b0b0b] rounded-none" />
         {/* Slightly lighter overlay */}
