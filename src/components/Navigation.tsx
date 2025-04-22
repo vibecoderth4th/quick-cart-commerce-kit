@@ -1,7 +1,7 @@
-
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "@/components/ui/navigation-menu";
+import MobileNavMenu from "./MobileNavMenu";
 
 type NavigationProps = {
   cartSlot: React.ReactNode;
@@ -29,13 +29,15 @@ const Navigation = ({
 
   // Mobile fallback
   if (isMobile) {
-    return <div className="flex items-center w-full px-4 py-4 bg-white shadow-sm">
-        <Link to="/" className="mr-4">
+    return <div className="flex items-center w-full px-4 py-4 bg-black">
+        <MobileNavMenu navItems={navItems} />
+        <Link to="/" className="mx-auto">
           <img src="/logo.png" alt="Logo" className="h-8" />
         </Link>
         <div className="ml-auto">{cartSlot}</div>
       </div>;
   }
+
   return <nav style={{
     height: '155px'
   }} className="relative w-full flex flex-col items-center">
