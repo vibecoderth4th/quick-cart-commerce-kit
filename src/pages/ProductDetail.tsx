@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -33,6 +33,11 @@ const ProductDetail = () => {
     { size: "M", quantity: 1 }
   ]);
   const [totalQuantity, setTotalQuantity] = useState(1);
+
+  // Add effect to scroll to top on component mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [productId]);
 
   // If product not found
   if (!product) {
