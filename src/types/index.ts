@@ -5,11 +5,37 @@ export type Product = {
   price: number;
   image: string;
   category: "men" | "women" | "collectibles";
+  size?: "S" | "M" | "L" | "XL";
 };
 
 export type CartItem = {
   product: Product;
   quantity: number;
+};
+
+export type OrderItem = {
+  productId: string;
+  title: string;
+  price: number;
+  quantity: number;
+  size: string;
+};
+
+export type Order = {
+  id: string;
+  email: string;
+  items: OrderItem[];
+  totalPrice: number;
+  status: "pending" | "completed";
+  date: string;
+  shippingAddress: {
+    fullName: string;
+    address: string;
+    city: string;
+    state: string;
+    postalCode: string;
+    country: string;
+  };
 };
 
 export type AdminSession = {

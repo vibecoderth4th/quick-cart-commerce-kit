@@ -5,8 +5,8 @@ import { CartItem, Product } from "@/types";
 type CartContextType = {
   cartItems: CartItem[];
   addToCart: (product: Product) => void;
-  removeFromCart: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  removeFromCart: (index: number) => void;
+  updateQuantity: (index: number, quantity: number) => void;
   clearCart: () => void;
   totalItems: number;
   totalPrice: number;
@@ -53,8 +53,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const addToCart = (product: Product) => {
     setCartItems((prevItems) => {
+      // For products with sizes, we don't group them
+      if (product.size) {
+        return [...prevItems, { product, quantity: 1 }];
+      }
+
+      // For products without sizes, check if exists and update quantity
       const existingItemIndex = prevItems.findIndex(
-        (item) => item.product.id === product.id
+        (item) => item.product.id === product.id && !item.product.size
       );
 
       if (existingItemIndex > -1) {
@@ -67,23 +73,23 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     });
   };
 
-  const removeFromCart = (productId: string) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.product.id !== productId)
+  const removeFromCart = (index: number) => {
+    setCartItems((prevItems) => 
+      prevItems.filter((_, i) => i !== index)
     );
   };
 
-  const updateQuantity = (productId: string, quantity: number) => {
+  const updateQuantity = (index: number, quantity: number) => {
     if (quantity <= 0) {
-      removeFromCart(productId);
+      removeFromCart(index);
       return;
     }
 
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.product.id === productId ? { ...item, quantity } : item
-      )
-    );
+    setCartItems((prevItems) => {
+      const updatedItems = [...prevItems];
+      updatedItems[index].quantity = quantity;
+      return updatedItems;
+    });
   };
 
   const clearCart = () => {

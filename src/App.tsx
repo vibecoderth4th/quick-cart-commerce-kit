@@ -10,6 +10,7 @@ import HomePage from "./pages/Index";
 import MenPage from "./pages/Men";
 import WomenPage from "./pages/Women";
 import CollectiblesPage from "./pages/Collectibles";
+import ProductDetailPage from "./pages/ProductDetail";
 import ContactPage from "./pages/Contact";
 import NotFoundPage from "./pages/NotFound";
 
@@ -28,6 +29,7 @@ const App = () => {
               <Route path="men" element={<MenPage />} />
               <Route path="women" element={<WomenPage />} />
               <Route path="collectibles" element={<CollectiblesPage />} />
+              <Route path="product/:productId" element={<ProductDetailPage />} />
               <Route path="contact" element={<ContactPage />} />
             </Route>
             

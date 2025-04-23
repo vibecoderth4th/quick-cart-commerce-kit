@@ -75,8 +75,8 @@ const Cart = () => {
                 <p className="text-center text-muted-foreground py-6">Your cart is empty</p>
               ) : (
                 <>
-                  {cartItems.map((item) => (
-                    <div key={item.product.id} className="flex items-center justify-between gap-4">
+                  {cartItems.map((item, index) => (
+                    <div key={`${item.product.id}-${item.product.size || 'default'}-${index}`} className="flex items-center justify-between gap-4">
                       <div className="flex items-center gap-4">
                         <img 
                           src={item.product.image}
@@ -85,7 +85,10 @@ const Cart = () => {
                         />
                         <div>
                           <p className="font-medium">{item.product.title}</p>
-                          <p className="text-sm text-gray-500">${item.product.price.toFixed(2)}</p>
+                          <p className="text-sm text-gray-500">
+                            ${item.product.price.toFixed(2)}
+                            {item.product.size && <span className="ml-2">Size: {item.product.size}</span>}
+                          </p>
                         </div>
                       </div>
                       
@@ -94,7 +97,7 @@ const Cart = () => {
                           variant="outline" 
                           size="icon" 
                           className="h-8 w-8 rounded-full"
-                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                          onClick={() => updateQuantity(index, item.quantity - 1)}
                         >
                           <Minus className="h-3 w-3" />
                         </Button>
@@ -103,7 +106,7 @@ const Cart = () => {
                           variant="outline" 
                           size="icon" 
                           className="h-8 w-8 rounded-full"
-                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(index, item.quantity + 1)}
                         >
                           <Plus className="h-3 w-3" />
                         </Button>
@@ -111,7 +114,7 @@ const Cart = () => {
                           variant="ghost" 
                           size="icon"
                           className="h-8 w-8 ml-2"
-                          onClick={() => removeFromCart(item.product.id)}
+                          onClick={() => removeFromCart(index)}
                         >
                           <X className="h-4 w-4" />
                         </Button>
